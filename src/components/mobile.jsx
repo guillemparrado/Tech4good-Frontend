@@ -1,25 +1,14 @@
-import React from "react";
-import Map from "./Map";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
+import App from "../App";
 
-const Mobile = ({ barrios }) => {
+const Mobile = () => {
   return (
-    <div className="flex">
-      <div className="main w-full h-screen mb-[80px]">
-        <Map />
-        <div className="flex p-3 flex-col place-items-center gap-4">
-          <h2 className="text-2xl font-bold">Barris</h2>
-          <div className="district-list flex flex-col gap-2 place-items-center">
-            {barrios.map((barrio, i) => {
-              return (
-                <div key={i} className="barrio">
-                  {barrio}
-                </div>
-              );
-            })}
-          </div>
-        </div>
+    <div className="flex mb-[80px]">
+      <div className="main w-full">
+        <Routes>
+          <Route path="/" element={<App />} />
+        </Routes>
       </div>
       <div className="btm-nav">
         <button>

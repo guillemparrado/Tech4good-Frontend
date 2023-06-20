@@ -5,14 +5,7 @@ import { useState } from "react";
 import { Marker } from "@react-google-maps/api";
 import { MarkerF } from "@react-google-maps/api";
 import Card from "./Card";
-
-const containerStyle = {
-  height: "100vh",
-  display: "flex",
-  justifyContent: "center",
-  justifyItems: "center",
-  alignItems: "center",
-};
+import { useWindowSize } from "@uidotdev/usehooks";
 
 const center = {
   lat: 41.4165590327245,
@@ -138,14 +131,20 @@ const options = {
   name: "Polygon 1",
 };
 
-const onLoad = (polygon) => {
-  console.log("polygon: ", polygon);
-};
-
 function Map() {
   const [coords, setCoords] = useState(center);
   const [distrito, setDistrito] = useState();
   const [card, setCard] = useState(false);
+
+  const size = useWindowSize();
+
+  const containerStyle = {
+    height: size.width < 768 ? "50vh" : "100vh",
+    display: "flex",
+    justifyContent: "center",
+    justifyItems: "center",
+    alignItems: "center",
+  };
 
   let eixample = {
     id: 1,

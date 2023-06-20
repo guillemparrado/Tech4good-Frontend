@@ -1,20 +1,18 @@
-import Map from "./Map";
+import Lista from "./Lista";
+import { Routes } from "react-router-dom";
+import { Route } from "react-router-dom";
+import App from "../App";
 
-const Desktop = ({ barrios }) => {
+const Desktop = () => {
   return (
     <div className="layout flex overflow-auto">
-      <div className="sidebar flex flex-col w-[250px] bg-black p-3 h-screen sticky top-0 gap-3 ">
-        <h2 className="text-2xl font-light mb-4 text-center">Barris</h2>
-        {barrios.map((barrio, i) => {
-          return (
-            <div key={i} className="barrio">
-              {barrio}
-            </div>
-          );
-        })}
+      <div className="sidebar overflow-auto flex flex-col w-[250px] bg-black p-3 h-screen sticky top-0 gap-3 ">
+        <Lista />
       </div>
       <div className="main w-full h-screen">
-        <Map />
+        <Routes>
+          <Route path="/" element={<App />} />
+        </Routes>
       </div>
     </div>
   );
