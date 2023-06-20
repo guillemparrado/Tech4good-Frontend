@@ -1,7 +1,13 @@
+import Barrio from "./view/Barrio";
+import Card from "./components/card";
+
+
 function App() {
   return (
     <>
-      <button className="btn">enviar</button>
+     
+      <Card/>
+       <Barrio/>
     </>
   );
 }
