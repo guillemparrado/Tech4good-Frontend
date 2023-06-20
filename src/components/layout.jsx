@@ -3,6 +3,8 @@ import React from "react";
 import Desktop from "./desktop";
 import Mobile from "./mobile";
 
+
+
 const Layout = () => {
   const barrios = ["Trinitat Nova", "canyelles", "roquetes"];
   const size = useWindowSize();
