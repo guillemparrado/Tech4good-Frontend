@@ -3,6 +3,8 @@ import { useState } from "react";
 
 const Lista = () => {
   const [disBar, setdisBar] = useState(false);
+  const [barrio, setBarrio] = useState();
+  const [district, setDistrict] = useState();
 
   const barrios = [
     "Trinitat Nova",
@@ -77,16 +79,34 @@ const Lista = () => {
     "sarria-sant gervasi",
     "ciutat vella",
   ];
+  const handleDistricts = (district) => {
+    setdisBar(!disBar);
+    // setDistrict(district);
+  };
+  const handleBarrios = (barrio) => {
+    // setBarrio(barrio);
+  };
+
   return (
     <>
       {disBar && (
         <>
           <h2 className="text-xl font-bold mb-4">Barris</h2>
+          <span
+            onClick={() => setdisBar(!disBar)}
+            className="hover:cursor-pointer"
+          >
+            ⬅️
+          </span>
           {barrios.map((barrio, i) => {
             return (
-              <div key={i} className="barrio">
+              <span
+                onClick={handleBarrios}
+                key={i}
+                className="barrio hover:cursor-pointer"
+              >
                 {barrio}
-              </div>
+              </span>
             );
           })}
         </>
@@ -96,9 +116,13 @@ const Lista = () => {
           <h2 className="text-xl font-bold mb-4">Districtes</h2>
           {districts.map((barrio, i) => {
             return (
-              <div key={i} className="barrio">
+              <span
+                onClick={handleDistricts}
+                key={i}
+                className="barrio hover:cursor-pointer"
+              >
                 {barrio}
-              </div>
+              </span>
             );
           })}
         </>
