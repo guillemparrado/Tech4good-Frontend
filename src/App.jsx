@@ -1,23 +1,13 @@
-<<<<<<< HEAD
 import Barrio from "./view/Barrio";
 import Card from "./components/card";
 
-=======
 import Map from "./components/Map";
->>>>>>> 87fc84fc52b8eb78fec69447ff2e22d43b4f01f2
 
 function App() {
   const barrios = ["Trinitat Nova", "canyelles", "roquetes"];
   return (
-<<<<<<< HEAD
-    <>
-     
-      <Card/>
-       <Barrio/>
-    </>
-=======
-    <div className="layout flex">
-      <div className="sidebar flex flex-col w-[250px] bg-black p-3 h-screen sticky top-0 gap-3">
+    <div className="layout flex flex-col md:flex-row md:overflow-auto">
+      <div className="sidebar flex flex-col w-[250px] hidden md:visible bg-black p-3 h-screen sticky top-0 gap-3">
         <h2 className="text-2xl font-bold">Barris</h2>
         {barrios.map((barrio, i) => {
           return (
@@ -27,11 +17,60 @@ function App() {
           );
         })}
       </div>
-      <div className="main w-full justify-center place-content-center ">
+      <div className="btm-nav md:hidden">
+        <button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            />
+          </svg>
+        </button>
+        <button className="active">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </button>
+        <button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div className="main w-full h-screen">
         <Map />
       </div>
     </div>
->>>>>>> 87fc84fc52b8eb78fec69447ff2e22d43b4f01f2
   );
 }
 

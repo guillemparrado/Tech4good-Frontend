@@ -1,10 +1,9 @@
 import React from "react";
 import { GoogleMap, LoadScript, Polyline } from "@react-google-maps/api";
-import { Polygon } from "@react-google-maps/api";
 import { PolygonF } from "@react-google-maps/api";
 
 const containerStyle = {
-  height: "100%",
+  height: "30dvh",
   display: "flex",
   justifyContent: "center",
   justifyItems: "center",
