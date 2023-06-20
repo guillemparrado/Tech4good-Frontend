@@ -9,7 +9,7 @@ const Mobile = ({ barrios }) => {
       <div className="main w-full h-screen mb-[80px]">
         <Map />
         <div className="flex p-3 flex-col place-items-center gap-4">
-          <h2 className="text-2xl font-bold">Barris</h2>
+          <h2 className="text-2xl text-gray-50 font-bold">Barris</h2>
           <div className="district-list flex flex-col gap-2 place-items-center">
             {barrios.map((barrio, i) => {
               return (
