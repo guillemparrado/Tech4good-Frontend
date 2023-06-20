@@ -1,9 +1,9 @@
 import { useWindowSize } from "@uidotdev/usehooks";
+import React from "react";
+import Desktop from "./desktop";
+import Mobile from "./mobile";
 
-import Mobile from "./components/mobile";
-import Desktop from "./components/desktop";
-
-function App() {
+const Layout = () => {
   const barrios = ["Trinitat Nova", "canyelles", "roquetes"];
   const size = useWindowSize();
 
@@ -13,6 +13,6 @@ function App() {
       {size.width <= 768 && <Mobile barrios={barrios} />}
     </>
   );
-}
+};
 
-export default App;
+export default Layout;
