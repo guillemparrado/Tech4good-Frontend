@@ -3,23 +3,21 @@ const Card = () => {
    
     
     return (
-        <div className="card w-96 bg-primary text-primary-content">
-        <div className="card-body">
-                <h2 className="card-title">Nou Barris</h2>
-          <div className="">
-            
-              
-                <div className="font-bold text-neutral-50"><p>Quieres conocer más a nuestro barrio?</p></div>
-               
-              
-            
+     <div>
+<button className="btn" onClick={()=>window.my_modal_2.showModal()}>open modal</button>
+<dialog id="my_modal_2" className="modal">
+  <form method="dialog" className="modal-box">
+    <h3 className="font-bold text-lg">Hello!</h3>
+            <p className="py-4">Press ESC key or click outside to close</p>
+            <span className="btn">Mas Info</span>
+  </form>
+  <form method="dialog" className="modal-backdrop">
+           
+  <button>close</button>
+          </form>
+         
+</dialog>
           </div>
-          <div className="card-actions justify-end">
-            <button className="btn hover:bg-indigo-200-500 hover:text-white font-bold py-2 px-4 rounded-full">Mas Info</button>
-          </div>
-        </div>
-      </div>
-          
        
             
       );
