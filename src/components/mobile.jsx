@@ -4,29 +4,11 @@ import App from "../App";
 
 const Mobile = () => {
   return (
-<<<<<<< HEAD
     <div className="flex mb-[80px]">
       <div className="main w-full">
         <Routes>
           <Route path="/" element={<App />} />
         </Routes>
-=======
-    <div className="flex">
-      <div className="main w-full h-screen mb-[80px]">
-        <Map />
-        <div className="flex p-3 flex-col place-items-center gap-4">
-          <h2 className="text-2xl text-gray-50 font-bold">Barris</h2>
-          <div className="district-list flex flex-col gap-2 place-items-center">
-            {barrios.map((barrio, i) => {
-              return (
-                <div key={i} className="barrio">
-                  {barrio}
-                </div>
-              );
-            })}
-          </div>
-        </div>
->>>>>>> 86dcd994d2092c6ea71d0f19dbab0048a33a2191
       </div>
       <div className="btm-nav">
         <button>
