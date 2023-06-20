@@ -1,8 +1,6 @@
-import React from "react";
 import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { PolygonF } from "@react-google-maps/api";
 import { useState } from "react";
-import { Marker } from "@react-google-maps/api";
 import { MarkerF } from "@react-google-maps/api";
 import Card from "./Card";
 import { useWindowSize } from "@uidotdev/usehooks";
@@ -117,8 +115,74 @@ const paths = [
   { lat: 41.3949993082826, lng: 2.18689090407881 },
   { lat: 41.4016853455437, lng: 2.18692083199788 },
 ];
+const formatCoordinates = (coordinates) => {
+  const regex = /([\d\.]+) ([\d\.]+)/g;
+  const matches = coordinates.matchAll(regex);
+  const result = [];
 
-const options = {
+  for (const match of matches) {
+    const lat = parseFloat(match[2]);
+    const lng = parseFloat(match[1]);
+    result.push({ lat, lng });
+  }
+
+  return result;
+};
+const barriosBarcelona = [
+  {
+    nombre: "Gràcia",
+    distrito: "Gràcia",
+    habitantes: 12000,
+    precio_medio_alquiler: 1200,
+    precio_medio_compra: 450000,
+    actividades_barrio: ["Tiendas de moda", "Cafeterías", "Galerías de arte"],
+    geojson: {
+      type: "Feature",
+      properties: {},
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            { lng: 2.152901, lat: 41.409053 },
+            { lng: 2.154492, lat: 41.40944 },
+            { lng: 2.155613, lat: 41.408503 },
+            { lng: 2.155149, lat: 41.407618 },
+            { lng: 2.154163, lat: 41.407152 },
+            { lng: 2.152901, lat: 41.409053 },
+          ],
+        ],
+      },
+    },
+  },
+  {
+    nombre: "Eixample",
+    distrito: "Eixample",
+    habitantes: 54000,
+    precio_medio_alquiler: 1500,
+    precio_medio_compra: 600000,
+    actividades_barrio: ["Restaurantes", "Bares", "Tiendas de diseño"],
+    geojson: {
+      type: "Feature",
+      properties: {},
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            { lng: 2.163924, lat: 41.398544 },
+            { lng: 2.167022, lat: 41.397034 },
+            { lng: 2.169536, lat: 41.396214 },
+            { lng: 2.169416, lat: 41.393628 },
+            { lng: 2.166661, lat: 41.393135 },
+            { lng: 2.163924, lat: 41.398544 },
+          ],
+        ],
+      },
+    },
+  },
+  // Resto de objetos...
+];
+
+const optionsDis = {
   fillColor: "lightblue",
   strokeColor: "red",
   strokeOpacity: 1,
@@ -128,13 +192,12 @@ const options = {
   editable: false,
   geodesic: true,
   zIndex: 1,
-  name: "Polygon 1",
 };
 
 function Map() {
   const [coords, setCoords] = useState(center);
   const [distrito, setDistrito] = useState();
-  const [card, setCard] = useState(false);
+  const [card, setCard] = useState();
 
   const size = useWindowSize();
 
@@ -158,9 +221,9 @@ function Map() {
     setDistrito(barrio);
   };
 
-  const showCard = (distrito, e) => {
-    console.log(e);
-    window.my_modal_2.showModal();
+  const showCard = async (barrio) => {
+    await setCard(barrio);
+    await window.my_modal_2.showModal();
   };
 
   return (
@@ -173,21 +236,21 @@ function Map() {
         {/* Child components, such as markers, info windows, etc. */}
         <PolygonF
           paths={paths}
-          options={options}
+          options={optionsDis}
           onClick={() => goToBarrio(eixample)}
         />
         {distrito && (
           <>
-            {objetosBarcelona.map((barrio) => (
+            {objetosBarcelona.map((barrio, i) => (
               <MarkerF
-                key={barrio.id}
+                key={i}
                 position={{ lat: barrio.lat, lng: barrio.lng }}
-                onClick={(e) => showCard(barrio, e)}
+                onClick={() => showCard(barrio)}
               />
             ))}
           </>
         )}
-        <Card showCard={showCard} />
+        {card && <Card barrio={card} />}
       </GoogleMap>
     </LoadScript>
   );

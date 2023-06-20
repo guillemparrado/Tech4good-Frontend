@@ -2,6 +2,7 @@ import Lista from "./Lista";
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
 import App from "../App";
+import Barrio from "../view/Barrio";
 
 const Desktop = () => {
   return (
@@ -12,6 +13,7 @@ const Desktop = () => {
       <div className="main w-full h-screen">
         <Routes>
           <Route path="/" element={<App />} />
+          <Route path="/barrio/:id" element={<Barrio />} />
         </Routes>
       </div>
     </div>
