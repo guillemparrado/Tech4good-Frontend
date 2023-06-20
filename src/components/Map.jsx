@@ -187,7 +187,7 @@ function Map() {
             ))}
           </>
         )}
-        {card && <Card distrito={distrito} />}
+        <Card showCard={showCard} />
       </GoogleMap>
     </LoadScript>
   );
