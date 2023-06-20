@@ -160,7 +160,7 @@ function Map() {
 
   const showCard = (distrito, e) => {
     console.log(e);
-    setCard(true);
+    window.my_modal_2.showModal();
   };
 
   return (
