@@ -1,10 +1,13 @@
 import React from "react";
-import { GoogleMap, LoadScript, Polyline } from "@react-google-maps/api";
-import { Polygon } from "@react-google-maps/api";
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { PolygonF } from "@react-google-maps/api";
+import { useState } from "react";
+import { Marker } from "@react-google-maps/api";
+import { MarkerF } from "@react-google-maps/api";
+import Card from "./Card";
 
 const containerStyle = {
-  height: "100%",
+  height: "100vh",
   display: "flex",
   justifyContent: "center",
   justifyItems: "center",
@@ -14,7 +17,28 @@ const containerStyle = {
 const center = {
   lat: 41.4165590327245,
   lng: 2.169648119348686,
+  zoom: 13,
 };
+const objetosBarcelona = [
+  {
+    id: 1,
+    nombre: "Parque de la Ciutadella",
+    lat: 41.388,
+    lng: 2.1875,
+  },
+  {
+    id: 2,
+    nombre: "Mercado de Sant Antoni",
+    lat: 41.3753,
+    lng: 2.1607,
+  },
+  {
+    id: 3,
+    nombre: "Basílica de la Sagrada Familia",
+    lat: 41.4036,
+    lng: 2.1744,
+  },
+];
 const paths = [
   { lat: 41.4016853455437, lng: 2.18692083199788 },
   { lat: 41.401687219089, lng: 2.18692083257044 },
@@ -111,6 +135,7 @@ const options = {
   editable: false,
   geodesic: true,
   zIndex: 1,
+  name: "Polygon 1",
 };
 
 const onLoad = (polygon) => {
@@ -118,14 +143,55 @@ const onLoad = (polygon) => {
 };
 
 function Map() {
+  const [coords, setCoords] = useState(center);
+  const [distrito, setDistrito] = useState();
+  const [card, setCard] = useState(false);
+
+  let eixample = {
+    id: 1,
+    name: "Eixample",
+    lat: 41.392216663357125,
+    lng: 2.1668304865538386,
+  };
+
+  const goToBarrio = (barrio) => {
+    setCoords({ lat: barrio.lat, lng: barrio.lng, zoom: 14 });
+    setDistrito(barrio);
+  };
+
+  const showCard = (distrito, e) => {
+    console.log(e);
+    setCard(true);
+  };
+
   return (
     <LoadScript googleMapsApiKey={import.meta.env.VITE_API_KEY}>
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={13}>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={{ lat: coords.lat, lng: coords.lng }}
+        zoom={coords.zoom}
+      >
         {/* Child components, such as markers, info windows, etc. */}
-        <PolygonF onLoad={onLoad} paths={paths} options={options} />
+        <PolygonF
+          paths={paths}
+          options={options}
+          onClick={() => goToBarrio(eixample)}
+        />
+        {distrito && (
+          <>
+            {objetosBarcelona.map((barrio) => (
+              <MarkerF
+                key={barrio.id}
+                position={{ lat: barrio.lat, lng: barrio.lng }}
+                onClick={(e) => showCard(barrio, e)}
+              />
+            ))}
+          </>
+        )}
+        {card && <Card distrito={distrito} />}
       </GoogleMap>
     </LoadScript>
   );
 }
 
-export default React.memo(Map);
+export default Map;
